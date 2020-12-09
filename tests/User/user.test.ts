@@ -38,5 +38,11 @@ describe('User module', () => {
 
       await request(app).get('/ecommerce/users').expect(200, ListOfUsers);
     });
+
+    test('lista de usuários vazia', async () => {
+      repository.find.mockResolvedValue([]);
+
+      await request(app).get('/ecommerce/users').expect(200, []);
+    });
   });
 });
