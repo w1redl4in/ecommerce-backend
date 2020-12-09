@@ -10,6 +10,7 @@ class UserService {
 
   async create(data: User) {
     const response = await this.userRepository.save(data);
+    console.log('TESTE', response);
     return response;
   }
 }
