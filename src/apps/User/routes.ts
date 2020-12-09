@@ -1,5 +1,5 @@
 import { Router } from 'express';
-
+import 'express-async-errors';
 import * as UserController from './UserController';
 import { validateCreate } from './validator';
 

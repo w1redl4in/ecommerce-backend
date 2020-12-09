@@ -1,7 +1,8 @@
 import cors from 'cors';
-import express, { Application } from 'express';
+import express, { Application, Response, NextFunction, Request } from 'express';
 import routes from './routes';
 import 'reflect-metadata';
+import { ErrorHandler } from 'express-handler-errors';
 
 class App {
   public readonly express: Application;
@@ -10,6 +11,15 @@ class App {
     this.express = express();
     this.middleware();
     this.routes();
+    this.errorHandle();
+  }
+
+  private errorHandle(): void {
+    this.express.use(
+      (err: Error, _: Request, res: Response, next: NextFunction) => {
+        new ErrorHandler().handle(err, res, next);
+      }
+    );
   }
 
   private middleware(): void {

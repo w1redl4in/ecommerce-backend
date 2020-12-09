@@ -1,3 +1,4 @@
+import { CustomError } from 'express-handler-errors';
 import { Repository, getRepository } from 'typeorm';
 import { User } from './User.entity';
 
@@ -9,9 +10,17 @@ class UserService {
   }
 
   async create(data: User) {
-    const response = await this.userRepository.save(data);
+    try {
+      const response = await this.userRepository.save(data);
 
-    return response;
+      return response;
+    } catch (error) {
+      throw new CustomError({
+        code: 'SERVER_INTERNAL_ERROR',
+        message: 'Server Internal Error',
+        status: 500,
+      });
+    }
   }
 }
 
