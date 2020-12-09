@@ -10,6 +10,7 @@ export const validateCreate = async (
     .object()
     .shape({
       name: yup.string().required(),
+      email: yup.string().email(),
     })
     .validate(req.body, { abortEarly: false });
 

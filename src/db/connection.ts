@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import { User } from '../apps/User/User.entity';
 import { database, server } from '../config';
 
 const connection = createConnection({
@@ -10,7 +9,7 @@ const connection = createConnection({
   username: database.username,
   password: database.password,
   database: database.database,
-  entities: [User],
+  entities: ['src/apps/**/*.entity.ts'],
   synchronize: server.env === 'dev',
 });
 

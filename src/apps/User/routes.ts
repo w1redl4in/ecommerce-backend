@@ -6,6 +6,6 @@ import { validateCreate } from './validator';
 const routes = Router();
 
 routes.post('/', validateCreate, UserController.create);
-routes.get('/', UserController.get)
+routes.get('/', UserController.get);
 
 export default routes;
