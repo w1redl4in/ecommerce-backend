@@ -1,8 +1,9 @@
-import {Router} from 'express'
+import { Router } from 'express';
 
-const router = Router()
+import userRoutes from './apps/User/routes';
 
+const router = Router();
 
-router.get('/', (req, res) => res.json({ message: 'ok' }));
+router.use('/users', userRoutes);
 
-export default  router
+export default router;
