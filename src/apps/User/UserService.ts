@@ -12,28 +12,26 @@ class UserService {
   async create(data: User) {
     try {
       const response = await this.userRepository.save(data);
-
       return response;
     } catch (error) {
       throw new CustomError({
-        code: 'SERVER_INTERNAL_ERROR',
-        message: 'Server Internal Error',
+        code: 'CREATE_USER_ERROR',
+        message: 'Erro na criação de usuário',
         status: 500,
       });
     }
   }
 
   async get() {
-    try{
-      const response = await this.userRepository.find()
-
-      return response
+    try {
+      const response = await this.userRepository.find();
+      return response;
     } catch (error) {
       throw new CustomError({
-        code: 'Interal_ERROR',
-        message: 'internal error',
+        code: 'GET_USERS_ERROR',
+        message: 'Erro na busca de usuários',
         status: 500,
-      })
+      });
     }
   }
 }
