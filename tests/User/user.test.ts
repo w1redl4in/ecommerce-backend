@@ -1,9 +1,9 @@
+import request from 'supertest';
 import {
   createUser,
   ListOfUsers,
   UserBadRequest400,
 } from './__mocks__/user.mocks';
-import request from 'supertest';
 
 jest.mock('typeorm');
 
@@ -32,13 +32,11 @@ describe('User module', () => {
     });
   });
 
-  describe("Get users", () => {
+  describe('Get users', () => {
     test('lista de usuarios', async () => {
       repository.find.mockResolvedValue(ListOfUsers);
 
-        await request(app)
-          .get('/ecommerce/users')
-          .expect(200, ListOfUsers)
-    })
-  })
+      await request(app).get('/ecommerce/users').expect(200, ListOfUsers);
+    });
+  });
 });

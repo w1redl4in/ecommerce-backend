@@ -12,5 +12,9 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    'import/no-unresolved': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'global-require': 'off',
+  },
 };
