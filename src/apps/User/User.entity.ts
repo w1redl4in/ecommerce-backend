@@ -1,8 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+/* eslint-disable camelcase */
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Product } from '../Product/Product.entity';
 
-@Entity()
+@Entity('users')
 export class User {
-  @Column()
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -13,4 +21,13 @@ export class User {
     unique: true,
   })
   email!: string;
+
+  @CreateDateColumn()
+  created_at!: Date;
+
+  @UpdateDateColumn()
+  updated_at!: Date;
+
+  @OneToMany(() => Product, (product) => product.user)
+  products!: Product[];
 }

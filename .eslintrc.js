@@ -17,5 +17,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'global-require': 'off',
     'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
   },
 };

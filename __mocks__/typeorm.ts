@@ -15,3 +15,5 @@ export const UpdateDateColumn = () => {};
 export const Entity = () => {};
 export const PrimaryGeneratedColumn = () => {};
 export const getRepository = () => repositoryMock;
+export const ManyToOne = () => {};
+export const OneToMany = () => {};

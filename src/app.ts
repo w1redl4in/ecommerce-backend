@@ -1,8 +1,8 @@
 import cors from 'cors';
 import express, { Application, Response, NextFunction, Request } from 'express';
+import { ErrorHandler } from 'express-handler-errors';
 import routes from './routes';
 import 'reflect-metadata';
-import { ErrorHandler } from 'express-handler-errors';
 
 class App {
   public readonly express: Application;

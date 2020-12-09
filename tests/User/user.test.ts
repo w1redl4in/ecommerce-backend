@@ -1,7 +1,9 @@
+import { create } from 'domain';
 import request from 'supertest';
 import {
   createUser,
   ListOfUsers,
+  UserAlreadyExists,
   UserBadRequest400,
 } from './__mocks__/user.mocks';
 
@@ -18,17 +20,27 @@ describe('User module', () => {
 
       await request(app)
         .post('/ecommerce/users')
-        .send({ name: 'Felipe Austríaco' })
+        .send(createUser)
         .expect(200, createUser);
     });
 
-    test('shouldnt create a user', async () => {
+    test('shouldnt create a user with invalid data', async () => {
       repository.save.mockRejectedValue(createUser);
 
       await request(app)
         .post('/ecommerce/users')
         .send({ x: 'Teste' })
         .expect(400, UserBadRequest400);
+    });
+
+    test('shouldnt create a duplicated user', async () => {
+      repository.findOne.mockResolvedValue({ email: createUser.email });
+      repository.save.mockResolvedValue(createUser);
+
+      await request(app)
+        .post('/ecommerce/users')
+        .send(createUser)
+        .expect(400, UserAlreadyExists);
     });
   });
 
