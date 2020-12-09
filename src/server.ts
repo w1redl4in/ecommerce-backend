@@ -1,6 +1,10 @@
 import connection from './db/connection';
+import { server, database } from './config';
 
 connection.then(() => {
+  console.log(`Database connected: ${database.database} - ${database.port}`);
   const app = require('./app').default;
-  app.listen(3333, () => console.log('App is running on 3333'));
+  app.listen(server.port, () =>
+    console.log('Server is running on', { port: server.port, env: server.env })
+  );
 });
