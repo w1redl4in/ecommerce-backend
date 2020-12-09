@@ -1,4 +1,4 @@
-import * as yup from 'yup';
+import yup from '../../config/yup';
 import { Request, Response, NextFunction } from 'express';
 
 export const validateCreate = async (
