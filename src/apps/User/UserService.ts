@@ -22,6 +22,20 @@ class UserService {
       });
     }
   }
+
+  async get() {
+    try{
+      const response = await this.userRepository.find()
+
+      return response
+    } catch (error) {
+      throw new CustomError({
+        code: 'Interal_ERROR',
+        message: 'internal error',
+        status: 500,
+      })
+    }
+  }
 }
 
 export default new UserService();
