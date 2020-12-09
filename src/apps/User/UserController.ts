@@ -14,6 +14,6 @@ export const get = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const response = await UserService.get(req.body)
+  const response = await UserService.get()
   return res.json(response)
 }
