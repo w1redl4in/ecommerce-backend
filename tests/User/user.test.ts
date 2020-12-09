@@ -31,4 +31,14 @@ describe('User module', () => {
         .expect(400, UserBadRequest400);
     });
   });
+
+  describe("Get users", () => {
+    test('lista de usuarios', async () => {
+      repository.find.mockResolvedValue(ListOfUsers);
+
+        await request(app)
+          .get('/ecommerce/users')
+          .expect(200, ListOfUsers)
+    })
+  })
 });
