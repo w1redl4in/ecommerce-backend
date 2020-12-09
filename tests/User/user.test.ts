@@ -1,6 +1,4 @@
-import { createUser } from './__mocks__/user.mocks';
-import { MockProxy } from 'jest-mock-extended';
-import { Repository } from 'typeorm';
+import { createUser, UserBadRequest400 } from './__mocks__/user.mocks';
 import request from 'supertest';
 import { User } from '../../src/apps/User/User.entity';
 
@@ -15,7 +13,16 @@ describe('User module', () => {
 
     await request(app)
       .post('/ecommerce/users')
-      .send(createUser)
+      .send({ name: 'Felipe Austríaco' })
       .expect(200, createUser);
+  });
+
+  test('shouldnt create a user', async () => {
+    repository.save.mockRejectedValue(createUser);
+
+    await request(app)
+      .post('/ecommerce/users')
+      .send({ x: 'Teste' })
+      .expect(400, UserBadRequest400);
   });
 });
