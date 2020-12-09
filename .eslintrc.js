@@ -16,5 +16,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     'global-require': 'off',
+    'import/extensions': 'off',
   },
 };

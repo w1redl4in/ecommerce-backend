@@ -1,4 +1,4 @@
-import connection from './db/connection';
+import connection from './config/db/connection';
 import { server, database } from './config';
 
 connection.then(() => {
