@@ -9,7 +9,20 @@ export const create = async (
   return res.json(response);
 };
 
-export const get = async (_: Request, res: Response): Promise<Response> => {
-  const response = await UserService.get();
+export const list = async (_: Request, res: Response): Promise<Response> => {
+  const response = await UserService.list();
   return res.json(response);
+};
+
+export const index = async (req: Request, res: Response): Promise<Response> => {
+  const response = await UserService.index(req.params.id);
+  return res.json(response);
+};
+
+export const remove = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  await UserService.remove(req.params.id);
+  return res.sendStatus(204);
 };

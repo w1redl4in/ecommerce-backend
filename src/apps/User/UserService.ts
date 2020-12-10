@@ -30,7 +30,7 @@ class UserService {
     }
   }
 
-  async get() {
+  async list() {
     try {
       const response = await this.userRepository.find({
         relations: ['products'],
@@ -43,6 +43,42 @@ class UserService {
         message: 'Erro na busca de usuários',
         status: 500,
       });
+    }
+  }
+
+  async index(id: string) {
+    try {
+      const userExists = this.userRepository.findOne(id, {
+        relations: ['products'],
+      });
+
+      if (!userExists)
+        throw new CustomError({
+          code: 'USER_NOT_FOUND',
+          message: 'Usuário não encontrado',
+          status: 404,
+        });
+
+      return userExists;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async remove(id: string) {
+    try {
+      const userExists = await this.userRepository.findOne(id);
+
+      if (!userExists)
+        throw new CustomError({
+          code: 'USER_NOT_FOUND',
+          message: 'Usuário não encontrado',
+          status: 404,
+        });
+
+      await this.userRepository.delete(userExists.id);
+    } catch (error) {
+      throw error;
     }
   }
 }
