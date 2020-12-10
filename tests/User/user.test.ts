@@ -1,4 +1,3 @@
-import { create } from 'domain';
 import request from 'supertest';
 import {
   createUser,
@@ -11,7 +10,7 @@ jest.mock('typeorm');
 
 const app = require('../../src/app').default;
 
-describe('User module', () => {
+describe('Users', () => {
   const repository = require('typeorm').getRepository();
 
   describe('Create user', () => {
