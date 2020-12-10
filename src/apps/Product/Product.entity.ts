@@ -12,6 +12,8 @@ export class Product {
   @Column()
   description!: string;
 
-  @ManyToOne(() => User, (user) => user.products)
+  @ManyToOne(() => User, (user) => user.products, {
+    onDelete: 'CASCADE',
+  })
   user!: User;
 }
