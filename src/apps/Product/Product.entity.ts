@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '../User/User.entity';
+import { Order } from '../Order/Order.entity';
 
 @Entity()
 export class Product {
@@ -12,8 +12,6 @@ export class Product {
   @Column()
   description!: string;
 
-  @ManyToOne(() => User, (user) => user.products, {
-    onDelete: 'CASCADE',
-  })
-  user!: User;
+  @ManyToOne(() => Order, (order) => order.product)
+  order!: Order;
 }

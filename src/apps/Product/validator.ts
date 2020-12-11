@@ -11,7 +11,7 @@ export const productValidation = async (
     .shape({
       name: yup.string().required(),
       description: yup.string().required(),
-      user: yup.number().required(),
+      order: yup.number().required(),
     })
     .validate(req.body, { abortEarly: false });
 

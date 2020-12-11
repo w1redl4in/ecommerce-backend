@@ -3,13 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Product } from '../Product/Product.entity';
-
-@Entity('users')
+import { Order } from '../Order/Order.entity';
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -28,6 +28,6 @@ export class User {
   @UpdateDateColumn()
   updated_at!: Date;
 
-  @OneToMany(() => Product, (product) => product.user)
-  products!: Product[];
+  @OneToOne((type) => Order, (order) => order.user)
+  order!: Order;
 }

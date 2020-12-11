@@ -33,7 +33,7 @@ class UserService {
   async list() {
     try {
       const response = await this.userRepository.find({
-        relations: ['products'],
+        relations: ['order'],
       });
 
       return response;

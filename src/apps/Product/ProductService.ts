@@ -11,7 +11,9 @@ class ProductService {
   }
 
   async list() {
-    const response = await this.productRepository.find({ relations: ['user'] });
+    const response = await this.productRepository.find({
+      relations: ['order'],
+    });
 
     return response;
   }
