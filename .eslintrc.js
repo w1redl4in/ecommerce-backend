@@ -20,5 +20,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
     camelcase: 'off',
+    '@typescript-eslint/ban-types': 'off',
   },
 };
