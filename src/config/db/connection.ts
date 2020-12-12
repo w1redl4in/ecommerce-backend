@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import { database, server } from '..';
+import { database, server } from '../config';
 
 const connection = createConnection({
   type: 'postgres',

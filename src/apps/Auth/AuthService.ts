@@ -2,7 +2,7 @@ import { CustomError } from 'express-handler-errors';
 import { getRepository, Repository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 import { User } from '../User/User.entity';
-import { auth } from '../../config';
+import { auth } from '../../config/config';
 import logger from '../../middlewares/Logger';
 
 interface Auth {
