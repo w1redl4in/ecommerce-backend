@@ -10,6 +10,6 @@ const router = Router();
 router.use('/users', userRoutes);
 router.use('/products', productRoutes);
 router.use('/orders', orderRoutes);
-router.use('/session', authRoutes);
+router.use('/auth', authRoutes);
 
 export default router;
