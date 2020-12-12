@@ -16,7 +16,9 @@ export class Order {
   @OneToMany(() => Product, (product) => product.order)
   product!: Product;
 
-  @OneToOne((type) => User, (user) => user.order)
+  @OneToOne((type) => User, (user) => user.order, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user!: User;
 }
