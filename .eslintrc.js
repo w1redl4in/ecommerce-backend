@@ -21,5 +21,6 @@ module.exports = {
     'class-methods-use-this': 'off',
     camelcase: 'off',
     '@typescript-eslint/ban-types': 'off',
+    'no-template-curly-in-string': 'off',
   },
 };
