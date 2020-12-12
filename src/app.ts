@@ -2,6 +2,7 @@ import cors from 'cors';
 import express, { Application, Response, NextFunction, Request } from 'express';
 import { ErrorHandler } from 'express-handler-errors';
 import routes from './routes';
+import logger from './middlewares/Logger';
 import 'reflect-metadata';
 
 class App {
@@ -17,7 +18,7 @@ class App {
   private errorHandle(): void {
     this.express.use(
       (err: Error, _: Request, res: Response, next: NextFunction) => {
-        new ErrorHandler().handle(err, res, next);
+        new ErrorHandler().handle(err, res, next, logger as any);
       }
     );
   }

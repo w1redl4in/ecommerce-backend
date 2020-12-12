@@ -1,10 +1,15 @@
 import connection from './config/db/connection';
+import logger from './middlewares/Logger';
 import { server, database } from './config';
 
 connection.then(() => {
-  console.log(`Database connected: ${database.database} - ${database.port}`);
+  logger.info(
+    `::Server::Connection::Database connected::${database.database}-${database.port}`
+  );
   const app = require('./app').default;
   app.listen(server.port, () =>
-    console.log('Server is running on', { port: server.port, env: server.env })
+    logger.info(
+      `::Server::Connection::Server is running::${server.env}-${server.port}`
+    )
   );
 });
