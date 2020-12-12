@@ -20,3 +20,8 @@ export const database = {
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE,
 };
+
+export const auth = {
+  secret: String(process.env.SECRET),
+  expiresIn: process.env.EXPIRES_IN,
+};
