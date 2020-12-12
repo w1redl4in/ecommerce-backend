@@ -9,7 +9,7 @@ connection.then(() => {
   const app = require('./app').default;
   app.listen(server.port, () =>
     logger.info(
-      `::Server::Connection::Sesrver is running::${server.env}-${server.port}`
+      `::Server::Connection::Server is running::${server.env}-${server.port}`
     )
   );
 });
