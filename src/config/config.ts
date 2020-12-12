@@ -5,8 +5,6 @@ const envdir = process.cwd();
 
 config({ path: `${envdir}/${envfile}` });
 
-console.log(`${envdir}/${envfile}`);
-
 export const server = {
   port: process.env.SERVER_PORT,
   env: process.env.NODE_ENV,
