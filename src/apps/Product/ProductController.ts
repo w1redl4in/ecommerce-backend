@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import path from 'path';
 import ProductService from './ProductService';
 
 export const list = async (_: Request, res: Response): Promise<Response> => {
@@ -10,7 +11,7 @@ export const create = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const response = await ProductService.create(req.body);
+  const response = await ProductService.create(req.body, req.file);
   return res.json(response);
 };
 

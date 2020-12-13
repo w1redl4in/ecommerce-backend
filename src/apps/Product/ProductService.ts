@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-catch */
 import { CustomError } from 'express-handler-errors';
 import { Repository, getRepository } from 'typeorm';
+import { server } from '../../config/config';
 import { Product } from './Product.entity';
 
 class ProductService {
@@ -18,8 +19,14 @@ class ProductService {
     return response;
   }
 
-  async create(data: Product) {
-    const response = await this.productRepository.save(data);
+  async create(data: Product, file: Express.Multer.File) {
+    const { description, name } = data;
+
+    const response = await this.productRepository.save({
+      name,
+      description,
+      imageUrl: `http://localhost:${server.port}/ecommerce/files/${file.filename}`,
+    });
 
     return response;
   }

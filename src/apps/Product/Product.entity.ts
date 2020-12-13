@@ -12,6 +12,11 @@ export class Product {
   @Column()
   description!: string;
 
-  @ManyToOne(() => Order, (order) => order.product)
+  @Column({
+    nullable: true,
+  })
+  imageUrl!: string;
+
+  @ManyToOne(() => Order, (order) => order.products)
   order!: Order;
 }
