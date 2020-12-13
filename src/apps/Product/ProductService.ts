@@ -22,6 +22,25 @@ class ProductService {
   async create(data: Product, file: Express.Multer.File) {
     const { description, name } = data;
 
+    const productExists = await this.productRepository.findOne({
+      description,
+      name,
+    });
+
+    if (productExists)
+      throw new CustomError({
+        code: 'PRODUCT_ALREADY_EXISTS',
+        message: 'Produto já existente',
+        status: 400,
+      });
+
+    if (!description || !name || !file)
+      throw new CustomError({
+        code: 'VALIDATION_ERROR',
+        message: 'Erro de validação',
+        status: 400,
+      });
+
     const response = await this.productRepository.save({
       name,
       description,
