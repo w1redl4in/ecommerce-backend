@@ -36,6 +36,30 @@ class OrderService {
       });
     }
   }
+
+  async index(id: string) {
+    try {
+      const order = await this.orderRepository.findOne(id, {
+        relations: ['products', 'user'],
+      });
+
+      if (!order)
+        throw new CustomError({
+          code: 'ORDER_NOT_FOUND',
+          message: 'Pedido não encontrado',
+          status: 404,
+        });
+
+      return order;
+    } catch (error) {
+      console.log('pedido', error);
+      throw new CustomError({
+        code: 'INDEX_ORDER_ERROR',
+        message: 'Houve um problema na busca do pedido',
+        status: 500,
+      });
+    }
+  }
 }
 
 export default new OrderService();

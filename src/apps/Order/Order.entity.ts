@@ -14,7 +14,7 @@ export class Order {
   id!: string;
 
   @OneToMany(() => Product, (product) => product.order)
-  product!: Product;
+  products!: Product[];
 
   @OneToOne((type) => User, (user) => user.order, {
     onDelete: 'CASCADE',
