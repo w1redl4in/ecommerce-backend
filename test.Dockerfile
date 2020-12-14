@@ -6,9 +6,9 @@ RUN apk --no-cache add --virtual builds-deps build-base python
 
 ENV NODE_ENV=dev
 
-COPY package.json yarn.lock .env* ./
+COPY . ./
 RUN yarn global add pm2
 RUN yarn install
-ADD ./dist /app
+RUN yarn build
 EXPOSE 3333
-CMD [ "pm2-runtime", "server.js"]
+CMD [ "pm2-runtime", "dist/server.js"]

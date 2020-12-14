@@ -59,7 +59,7 @@
     "typescript": "^4.1.2"
   },
   "scripts": {
-    "start:dev": "NODE_ENV=dev ts-node-dev --docker-compose up -d --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "start:dev": "NODE_ENV=dev ts-node-dev --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
     "build": "rimraf dist && babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start:dev:win": "SET NODE_ENV=dev&& ts-node-dev --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",

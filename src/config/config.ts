@@ -11,9 +11,9 @@ export const server = {
 };
 
 export const database = {
-  port: process.env.DATABASE_PORT,
+  port: Number(process.env.DATABASE_PORT),
   host: process.env.DATABASE_HOST,
-  type: process.env.DATABASE_TYPE,
+  type: String(process.env.DATABASE_TYPE) || 'postgres',
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE,
