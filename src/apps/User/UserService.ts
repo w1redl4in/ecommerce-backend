@@ -2,6 +2,7 @@
 import { CustomError } from 'express-handler-errors';
 import { Repository, getRepository } from 'typeorm';
 import { User } from './User.entity';
+import nodemailer from '../../config/nodemailer'
 
 class UserService {
   private userRepository!: Repository<User>;
@@ -15,7 +16,6 @@ class UserService {
       const userExists = await this.userRepository.findOne({
         email: data.email,
       });
-
       if (userExists)
         throw new CustomError({
           code: 'USER_ALREADY_EXISTS',
@@ -24,6 +24,12 @@ class UserService {
         });
 
       const response = await this.userRepository.save(data);
+      await nodemailer.sendMail({
+        from: 'Ecommerce',
+        to: data.email,
+        subject: 'Ecommerce Dos Cria',
+        text: 'Sua conta foi criada com sucesso',
+      })
       return response;
     } catch (error) {
       throw error;
