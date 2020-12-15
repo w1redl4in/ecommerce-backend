@@ -23,3 +23,8 @@ export const auth = {
   secret: String(process.env.SECRET),
   expiresIn: process.env.EXPIRES_IN,
 };
+
+export const mailer = {
+  host: process.env.EMAIL_HOST,
+  password: process.env.EMAIL_PASSWORD
+}

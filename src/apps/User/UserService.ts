@@ -24,7 +24,7 @@ class UserService {
         });
 
       const response = await this.userRepository.save(data);
-      await nodemailer.sendMail({
+      nodemailer.sendMail({
         from: 'Ecommerce',
         to: data.email,
         subject: 'Ecommerce Dos Cria',
