@@ -2,7 +2,7 @@
 import { CustomError } from 'express-handler-errors';
 import { Repository, getRepository } from 'typeorm';
 import { User } from './User.entity';
-import nodemailer from '../../config/nodemailer'
+import sendEmail from '../../config/nodemailer';
 
 class UserService {
   private userRepository!: Repository<User>;
@@ -24,12 +24,9 @@ class UserService {
         });
 
       const response = await this.userRepository.save(data);
-      nodemailer.sendMail({
-        from: 'Ecommerce',
-        to: data.email,
-        subject: 'Ecommerce Dos Cria',
-        text: 'Sua conta foi criada com sucesso',
-      })
+
+      await sendEmail(data.email, data.name);
+
       return response;
     } catch (error) {
       throw error;

@@ -1,4 +1,5 @@
 import { config } from 'dotenv';
+import { AprovedEmail } from '../emails/aproved';
 
 const envfile = `.env.${process.env.NODE_ENV}`;
 const envdir = process.cwd();
@@ -26,5 +27,6 @@ export const auth = {
 
 export const mailer = {
   host: process.env.EMAIL_HOST,
-  password: process.env.EMAIL_PASSWORD
-}
+  password: process.env.EMAIL_PASSWORD,
+  subject: 'Ecommerce',
+};
