@@ -1,10 +1,9 @@
 import { Router } from 'express';
 import * as AuthController from './AuthController';
-import { validateAuthentication, validateToken } from './validator';
+import { validateAuthentication } from './validator';
 
 const routes = Router();
 
 routes.post('/', validateAuthentication, AuthController.authenticate);
-routes.post('/validate', validateToken, AuthController.validateToken);
 
 export default routes;

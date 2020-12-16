@@ -16,18 +16,3 @@ export const validateAuthentication = async (
 
   return next();
 };
-
-export const validateToken = async (
-  req: Request,
-  _: Response,
-  next: NextFunction
-): Promise<void> => {
-  await yup
-    .object()
-    .shape({
-      token: yup.string().required(),
-    })
-    .validate(req.body, { abortEarly: false });
-
-  return next();
-};
