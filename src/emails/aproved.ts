@@ -56,7 +56,7 @@ const aprovedEmail = (who: string): string => `<!DOCTYPE html>
           text-align: center !important;
         }
         .webkit {
-          min-width: 97% !important;
+          min-width: 100% !important;
           height: 30em !important;
           background: white;
       }
@@ -207,7 +207,6 @@ const aprovedEmail = (who: string): string => `<!DOCTYPE html>
               </table>
           </td>
         </tr>
-
       </table>
     </center>
   </body>
