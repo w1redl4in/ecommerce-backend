@@ -11,6 +11,7 @@ export const validateCreate = async (
     .shape({
       name: yup.string().required(),
       email: yup.string().email().required(),
+      password: yup.string().required(),
     })
     .validate(req.body, { abortEarly: false });
 
