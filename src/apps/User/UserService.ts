@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 import { CustomError } from 'express-handler-errors';
 import { Repository, getRepository } from 'typeorm';
-import { string } from 'yup';
+import crypto from 'crypto'
 import { User } from './User.entity';
 import {sendEmailCreated, sendEmailRecovery} from '../../config/nodemailer';
 
@@ -80,6 +80,8 @@ class UserService {
           status: 404,
         });
 
+
+
       await this.userRepository.delete(userExists.id);
     } catch (error) {
       throw error;
@@ -97,7 +99,11 @@ class UserService {
           status: 404,
         })
 
-        await sendEmailRecovery(EmailExist.email, EmailExist.password)
+        const changePassword = crypto.randomBytes(4).toString('hex')
+
+        await this.userRepository.update(EmailExist.id, {password: changePassword})
+
+      await sendEmailRecovery(EmailExist.email, EmailExist.password)
   } catch (error) {
     throw error;
     }
