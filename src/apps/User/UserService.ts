@@ -98,7 +98,6 @@ class UserService {
         })
 
         await sendEmailRecovery(EmailExist.email, EmailExist.password)
-    return {password: EmailExist.password}
   } catch (error) {
     throw error;
     }
