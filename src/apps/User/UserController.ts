@@ -26,3 +26,11 @@ export const remove = async (
   await UserService.remove(req.params.id);
   return res.sendStatus(204);
 };
+
+export const RecoveryPassword = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const response = await UserService.get(req.body);
+  return res.json(response)
+}

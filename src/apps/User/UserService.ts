@@ -1,8 +1,9 @@
 /* eslint-disable no-useless-catch */
 import { CustomError } from 'express-handler-errors';
 import { Repository, getRepository } from 'typeorm';
+import { string } from 'yup';
 import { User } from './User.entity';
-import sendEmail from '../../config/nodemailer';
+import {sendEmailCreated, sendEmailRecovery} from '../../config/nodemailer';
 
 class UserService {
   private userRepository!: Repository<User>;
@@ -25,7 +26,7 @@ class UserService {
 
       const response = await this.userRepository.save(data);
 
-      await sendEmail(data.email, data.name);
+      await sendEmailCreated(data.email, data.name);
 
       return response;
     } catch (error) {
@@ -52,7 +53,7 @@ class UserService {
   async index(id: string) {
     try {
       const userExists = this.userRepository.findOne(id, {
-        relations: ['products'],
+        relations: ['order'],
       });
 
       if (!userExists)
@@ -82,6 +83,24 @@ class UserService {
       await this.userRepository.delete(userExists.id);
     } catch (error) {
       throw error;
+    }
+  }
+
+  async get(data: {email: string}) {
+    try {
+    const EmailExist = await this.userRepository.findOne({email: data.email})
+
+      if(!EmailExist)
+        throw new CustomError({
+          code: 'USER_NOT_FOUND',
+          message: 'Usuário não encontrado',
+          status: 404,
+        })
+
+        await sendEmailRecovery(EmailExist.email, EmailExist.password)
+    return {password: EmailExist.password}
+  } catch (error) {
+    throw error;
     }
   }
 }

@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import { mailer } from './config';
-import aprovedEmail from '../emails/aproved';
+import {recoveryPasswordEmail, aprovedEmail} from '../emails/aproved';
 import logger from '../middlewares/Logger';
 
 const Mailer = nodemailer.createTransport({
@@ -12,7 +12,7 @@ const Mailer = nodemailer.createTransport({
   },
 });
 
-async function sendEmail(to: string, name: string): Promise<void> {
+async function sendEmailCreated(to: string, name: string): Promise<void> {
   await Mailer.sendMail({
     from: mailer.host,
     to,
@@ -30,4 +30,13 @@ async function sendEmail(to: string, name: string): Promise<void> {
     );
 }
 
-export default sendEmail;
+async function sendEmailRecovery(to: string, password: string): Promise<void> {
+  await Mailer.sendMail({
+    from: mailer.host,
+    to,
+    subject: mailer.subject,
+    html: recoveryPasswordEmail(password)
+  })
+}
+
+export {sendEmailCreated, sendEmailRecovery};
