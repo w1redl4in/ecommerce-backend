@@ -103,9 +103,14 @@ class UserService {
 
         await this.userRepository.update(EmailExist.id, {password: changePassword})
 
-      await sendEmailRecovery(EmailExist.email, EmailExist.password)
+      await sendEmailRecovery(EmailExist.email, changePassword)
   } catch (error) {
-    throw error;
+    if(error instanceof CustomError) throw error
+    throw new CustomError({
+      code: 'USER_RECOVERY_ERROR',
+      message: 'Problema no envio de senha',
+      status: 500,
+    })
     }
   }
 }
