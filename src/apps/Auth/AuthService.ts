@@ -51,9 +51,13 @@ class AuthService {
 
       logger.info(`AuthService::authenticate::user found::generating token::`);
 
-      const token = await sign(data, auth.secret, {
-        expiresIn: auth.expiresIn,
-      });
+      const token = await sign(
+        { id: userExists.id, name: userExists.name, email: userExists.email },
+        auth.secret,
+        {
+          expiresIn: auth.expiresIn,
+        }
+      );
 
       logger.info(
         `AuthService::authenticate::user found::generating token::success`
@@ -69,15 +73,12 @@ class AuthService {
         `AuthService::authenticate::changing firstLogin flag to false::user::${userExists.id}::success`
       );
 
+      delete userExists.password;
+
       return {
         token,
         user: {
-          email: userExists.email,
-          firstLogin: userExists.firstLogin,
-          id: userExists.id,
-          name: userExists.name,
-          created_at: userExists.created_at,
-          updated_at: userExists.updated_at,
+          ...userExists,
         },
       };
     } catch (error) {

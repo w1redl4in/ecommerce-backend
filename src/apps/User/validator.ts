@@ -32,3 +32,18 @@ export const validateUserRecovery = async (
 
   return next();
 };
+
+export const validateImageUser = async (
+  req: Request,
+  _: Response,
+  next: NextFunction
+): Promise<void> => {
+  await yup
+    .object()
+    .shape({
+      image: yup.string().required(),
+    })
+    .validate(req.body, { abortEarly: false });
+
+  return next();
+};

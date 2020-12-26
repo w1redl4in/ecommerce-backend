@@ -4,6 +4,7 @@ import { Repository, getRepository } from 'typeorm';
 import crypto from 'crypto';
 import { User } from './User.entity';
 import { sendEmailCreated, sendEmailRecovery } from '../../config/nodemailer';
+import { UserRequest } from '../../utils/types';
 
 class UserService {
   private userRepository!: Repository<User>;
@@ -125,6 +126,22 @@ class UserService {
       throw new CustomError({
         code: 'USER_FIRST_LOGIN_ERROR',
         message: 'Houve um problema no firstLogin do user',
+        status: 500,
+      });
+    }
+  }
+
+  async patchImage(payload: { image: string }, user: UserRequest) {
+    try {
+      const { image } = payload;
+
+      await this.userRepository.update(user.id, {
+        imageUrl: image,
+      });
+    } catch (error) {
+      throw new CustomError({
+        code: 'USER_SET_IMAGE_ERROR',
+        message: 'Houve um problema ao definir a imagem do user',
         status: 500,
       });
     }

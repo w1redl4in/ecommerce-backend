@@ -34,3 +34,11 @@ export const recoveryPassword = async (
   const response = await UserService.userPasswordRecovery(req.body);
   return res.json(response);
 };
+
+export const patchImage = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const response = await UserService.patchImage(req.body, req.user);
+  return res.json(response);
+};
