@@ -1,2 +1,2 @@
 web: node server.js
-ls
+web: ls
