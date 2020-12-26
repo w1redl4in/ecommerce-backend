@@ -33,6 +33,12 @@ export class User {
   })
   firstLogin: boolean;
 
+  @Column({
+    nullable: true,
+    default: '',
+  })
+  imageUrl: string;
+
   @CreateDateColumn()
   created_at!: Date;
 
