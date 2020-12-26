@@ -27,10 +27,10 @@ export const remove = async (
   return res.sendStatus(204);
 };
 
-export const RecoveryPassword = async (
+export const recoveryPassword = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const response = await UserService.get(req.body);
-  return res.json(response)
-}
+  const response = await UserService.userPasswordRecovery(req.body);
+  return res.json(response);
+};

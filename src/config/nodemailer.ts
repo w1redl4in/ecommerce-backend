@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import { mailer } from './config';
-import {recoveryPasswordEmail, aprovedEmail} from '../emails/aproved';
+import { aprovedEmail, recoveryPasswordEmail } from '../emails';
 import logger from '../middlewares/Logger';
 
 const Mailer = nodemailer.createTransport({
@@ -35,8 +35,20 @@ async function sendEmailRecovery(to: string, password: string): Promise<void> {
     from: mailer.host,
     to,
     subject: mailer.subject,
-    html: recoveryPasswordEmail(password)
+    html: recoveryPasswordEmail(password),
   })
+    .then((message) => {
+      logger.info(
+        `::nodemailer::sendEmailRecovery::email sent to ${to}`,
+        message
+      );
+    })
+    .catch((error) => {
+      logger.error(
+        `::nodemailer::sendEmailRecovery::failed to sent email to ${to}`,
+        error
+      );
+    });
 }
 
-export {sendEmailCreated, sendEmailRecovery};
+export { sendEmailCreated, sendEmailRecovery };

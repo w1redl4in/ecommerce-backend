@@ -1,4 +1,6 @@
-export const aprovedEmail = (who: string): string => `<!DOCTYPE html>
+export const recoveryPasswordEmail = (
+  password: string
+): string => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -94,7 +96,7 @@ export const aprovedEmail = (who: string): string => `<!DOCTYPE html>
             </tr>
             <td align="center">
               <p style="font-weight: 600; font-size: 18px; color: #000000;">
-                Olá, ${who}
+                Olá, ${password}
               </p>
               <p style="font-weight: normal;">
                 Agradecemos por enviar seus dados e sua documentação,

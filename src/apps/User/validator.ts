@@ -17,3 +17,18 @@ export const validateCreate = async (
 
   return next();
 };
+
+export const validateUserRecovery = async (
+  req: Request,
+  _: Response,
+  next: NextFunction
+): Promise<void> => {
+  await yup
+    .object()
+    .shape({
+      email: yup.string().email().required(),
+    })
+    .validate(req.body, { abortEarly: false });
+
+  return next();
+};
