@@ -5,17 +5,17 @@ export const recoveryPasswordEmail = (
   <head>
     <meta charset="UTF-8" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>99</title>
+    <title>Ecommerce</title>
 
     <style type="text/css">
       body {
         padding: 0;
         -webkit-font-smoothing: antialiased;
-        font-family: "Open Sans", sans-serif;
+        font-family: "Sora", sans-serif;
       }
       table {
         border-spacing: 0;
@@ -95,12 +95,14 @@ export const recoveryPasswordEmail = (
                 </td>
             </tr>
             <td align="center">
-              <p style="font-weight: 600; font-size: 18px; color: #000000;">
-                Olá, ${password}
+              <p style="font-weight: normal;">
+                Sequelou com a senha né cria?! Relaxa que a gente dá um jeito!
+              </p>
+              <p style="color: black;font-size: 14px;font-weight: 600;">
+               ${password}
               </p>
               <p style="font-weight: normal;">
-                Agradecemos por enviar seus dados e sua documentação,
-                <br />agora é com a gente!
+                Agradecemos o seu contato qualquer violação reclamar na boca.
               </p>
             </td>
           </tr>
