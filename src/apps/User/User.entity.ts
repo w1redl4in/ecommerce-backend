@@ -3,16 +3,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
+  ObjectIdColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Order } from '../Order/Order.entity';
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id!: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
   @Column()
   name!: string;
@@ -23,9 +23,14 @@ export class User {
   email!: string;
 
   @Column({
-    nullable:true
+    nullable: true,
   })
   password!: string;
+
+  @Column({
+    nullable: true,
+  })
+  firstLogin: boolean;
 
   @CreateDateColumn()
   created_at!: Date;
@@ -33,6 +38,8 @@ export class User {
   @UpdateDateColumn()
   updated_at!: Date;
 
-  @OneToOne((type) => Order, (order) => order.user)
+  @OneToMany((type) => Order, (order) => order.user, {
+    onDelete: 'CASCADE',
+  })
   order!: Order;
 }
