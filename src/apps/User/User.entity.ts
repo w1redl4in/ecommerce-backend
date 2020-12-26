@@ -29,6 +29,7 @@ export class User {
 
   @Column({
     nullable: true,
+    default: true,
   })
   firstLogin: boolean;
 

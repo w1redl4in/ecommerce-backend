@@ -9,6 +9,7 @@ import {
 import { User } from '../User/User.entity';
 import { auth } from '../../config/config';
 import logger from '../../middlewares/Logger';
+import UserService from '../User/UserService';
 
 interface Auth {
   email: string;
@@ -22,7 +23,7 @@ class AuthService {
     this.userRepository = getRepository(User);
   }
 
-  async authenticate(data: Auth): Promise<{ token: string }> {
+  async authenticate(data: Auth): Promise<{ token: string; user: any }> {
     logger.info('AuthService::authenticate::received::', data);
 
     try {
@@ -58,7 +59,27 @@ class AuthService {
         `AuthService::authenticate::user found::generating token::success`
       );
 
-      return { token };
+      logger.info(
+        `AuthService::authenticate::changing firstLogin flag to false::user::${userExists.id}`
+      );
+
+      await UserService.userFirstLogin(userExists.id);
+
+      logger.info(
+        `AuthService::authenticate::changing firstLogin flag to false::user::${userExists.id}::success`
+      );
+
+      return {
+        token,
+        user: {
+          email: userExists.email,
+          firstLogin: userExists.firstLogin,
+          id: userExists.id,
+          name: userExists.name,
+          created_at: userExists.created_at,
+          updated_at: userExists.updated_at,
+        },
+      };
     } catch (error) {
       if (error instanceof CustomError) throw error;
       throw new CustomError({

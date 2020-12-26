@@ -115,6 +115,20 @@ class UserService {
       });
     }
   }
+
+  async userFirstLogin(id: string) {
+    try {
+      await this.userRepository.update(id, {
+        firstLogin: false,
+      });
+    } catch (error) {
+      throw new CustomError({
+        code: 'USER_FIRST_LOGIN_ERROR',
+        message: 'Houve um problema no firstLogin do user',
+        status: 500,
+      });
+    }
+  }
 }
 
 export default new UserService();
