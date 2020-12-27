@@ -117,7 +117,7 @@ class UserService {
     }
   }
 
-  async userFirstLogin(id: string) {
+  private async userFirstLogin(id: string) {
     try {
       await this.userRepository.update(id, {
         firstLogin: false,
@@ -134,6 +134,8 @@ class UserService {
   async patchImage(payload: { image: string }, user: UserRequest) {
     try {
       const { image } = payload;
+
+      await this.userFirstLogin(user.id);
 
       await this.userRepository.update(user.id, {
         imageUrl: image,
