@@ -148,6 +148,33 @@ class UserService {
       });
     }
   }
+
+  async getUserInfo(user: UserRequest) {
+    try {
+      const userId = user.id;
+
+      const userData = await this.userRepository.findOne(userId);
+
+      if (!userData)
+        throw new CustomError({
+          code: 'INVALID_USER_ID',
+          message: 'Usuário não encontrado',
+          status: 404,
+        });
+
+      delete userData?.password;
+
+      return userData;
+    } catch (error) {
+      if (error instanceof CustomError) throw error;
+
+      throw new CustomError({
+        code: 'GET_USER_INFO_ERROR',
+        message: 'Erro inesperado no GetUserInfo',
+        status: 500,
+      });
+    }
+  }
 }
 
 export default new UserService();
