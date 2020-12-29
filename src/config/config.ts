@@ -7,7 +7,7 @@ const envdir = process.cwd();
 config({ path: `${envdir}/${envfile}` });
 
 export const server = {
-  port: process.env.SERVER_PORT,
+  port: process.env.SERVER_PORT || 3333,
   env: process.env.NODE_ENV,
 };
 
