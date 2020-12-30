@@ -43,10 +43,10 @@ export const validateSwitchPassword = async (
     .shape({
       password: yup.string().required(),
     })
-    .validate(req.body, {abortEarly: false});
+    .validate(req.body, { abortEarly: false });
 
-    return next();
-}
+  return next();
+};
 
 export const validateImageUser = async (
   req: Request,
