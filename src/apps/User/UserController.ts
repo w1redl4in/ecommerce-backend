@@ -42,3 +42,11 @@ export const patchImage = async (
   const response = await UserService.patchImage(req.body, req.user);
   return res.json(response);
 };
+
+export const switchPassword = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const response = await UserService.switchPw(req.params.id, req.body)
+  return res.json(response)
+}

@@ -15,6 +15,7 @@ routes.get('/', UserController.list);
 routes.get('/:id', UserController.index);
 routes.delete('/:id', UserController.remove);
 routes.post('/recovery', validateUserRecovery, UserController.recoveryPassword);
+routes.patch('/password/:id', UserController.switchPassword)
 routes.patch('/image', Authorize, validateImageUser, UserController.patchImage);
 
 export default routes;

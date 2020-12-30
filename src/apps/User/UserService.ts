@@ -146,6 +146,18 @@ class UserService {
       });
     }
   }
+
+  async switchPw(id: string, data: {password: string}, ) {
+    try {
+      await this.userRepository.update(id, {password: data.password})
+    } catch (errror) {
+      throw new CustomError({
+        code: 'USER_SWITCH_PASSWORD_ERROR',
+        message: 'Houve um problema ao trocar a sua senha',
+        status: 500,
+      })
+    }
+  }
 }
 
 export default new UserService();
