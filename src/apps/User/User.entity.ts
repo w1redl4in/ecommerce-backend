@@ -40,6 +40,7 @@ export class User {
 
   @Column({
     nullable: true,
+    default: false,
   })
   switchPassword: boolean;
 
