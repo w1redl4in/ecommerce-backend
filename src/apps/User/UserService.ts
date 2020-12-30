@@ -6,6 +6,8 @@ import { User } from './User.entity';
 import { sendEmailCreated, sendEmailRecovery } from '../../config/nodemailer';
 import { UserRequest } from '../../utils/types';
 import logger from '../../middlewares/Logger';
+import { hashPassword } from '../../utils/hashPassword';
+import { auth } from '../../config/config';
 
 class UserService {
   private userRepository!: Repository<User>;
@@ -103,8 +105,14 @@ class UserService {
 
       const changePassword = crypto.randomBytes(4).toString('hex');
 
+      const hashedPassword = hashPassword(
+        EmailExist.email,
+        changePassword,
+        auth.passwordSecret
+      );
+
       await this.userRepository.update(EmailExist.id, {
-        password: changePassword,
+        password: hashedPassword,
         switchPassword: true,
       });
 
