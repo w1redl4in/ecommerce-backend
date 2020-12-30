@@ -6,6 +6,7 @@ import {
   validateCreate,
   validateImageUser,
   validateUserRecovery,
+  validateSwitchPassword
 } from './validator';
 
 const routes = Router();
@@ -16,6 +17,7 @@ routes.get('/getUserInfo', Authorize, UserController.getUserInfo);
 routes.get('/:id', UserController.index);
 routes.delete('/:id', UserController.remove);
 routes.post('/recovery', validateUserRecovery, UserController.recoveryPassword);
+routes.patch('/password', Authorize, validateSwitchPassword, UserController.switchPassword)
 routes.patch('/image', Authorize, validateImageUser, UserController.patchImage);
 
 export default routes;
