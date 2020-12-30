@@ -23,6 +23,7 @@ export const database = {
 export const auth = {
   secret: String(process.env.SECRET),
   expiresIn: process.env.EXPIRES_IN,
+  passwordSecret: String(process.env.SECRET_PASSWORD),
 };
 
 export const mailer = {
