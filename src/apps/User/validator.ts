@@ -33,6 +33,21 @@ export const validateUserRecovery = async (
   return next();
 };
 
+export const validateSwitchPassword = async (
+  req: Request,
+  _: Response,
+  next: NextFunction
+): Promise<void> => {
+  await yup
+    .object()
+    .shape({
+      password: yup.string().required(),
+    })
+    .validate(req.body, {abortEarly: false});
+
+    return next();
+}
+
 export const validateImageUser = async (
   req: Request,
   _: Response,

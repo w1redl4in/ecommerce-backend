@@ -38,6 +38,11 @@ export class User {
   })
   imageUrl: string;
 
+  @Column({
+    nullable: true,
+  })
+  switchPassword: boolean;
+
   @CreateDateColumn()
   created_at!: Date;
 

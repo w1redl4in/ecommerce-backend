@@ -47,9 +47,9 @@ export const switchPassword = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const response = await UserService.switchPw(req.params.id, req.body)
-  return res.json(response)
-}
+  const response = await UserService.switchPw(req.user, req.body);
+  return res.json(response);
+};
 export const getUserInfo = async (
   req: Request,
   res: Response

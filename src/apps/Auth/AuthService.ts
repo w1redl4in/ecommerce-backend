@@ -30,7 +30,7 @@ class AuthService {
 
       const userExists = await this.userRepository.findOne({ email });
 
-      if (!userExists) {
+        if (!userExists) {
         logger.error(`AuthService::authenticate::user not found::`);
         throw new CustomError({
           code: 'INVALID_USER',

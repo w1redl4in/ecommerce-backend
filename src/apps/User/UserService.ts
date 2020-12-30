@@ -5,6 +5,7 @@ import crypto from 'crypto';
 import { User } from './User.entity';
 import { sendEmailCreated, sendEmailRecovery } from '../../config/nodemailer';
 import { UserRequest } from '../../utils/types';
+import logger from '../../middlewares/Logger';
 
 class UserService {
   private userRepository!: Repository<User>;
@@ -104,6 +105,7 @@ class UserService {
 
       await this.userRepository.update(EmailExist.id, {
         password: changePassword,
+        switchPassword: true,
       });
 
       await sendEmailRecovery(EmailExist.email, changePassword);
@@ -149,15 +151,25 @@ class UserService {
     }
   }
 
-  async switchPw(id: string, data: {password: string}, ) {
+  async switchPw(user: UserRequest, data: { password: string }) {
     try {
-      await this.userRepository.update(id, {password: data.password})
-    } catch (errror) {
+      logger.info(`UserService::switchPw::try to change password::${user.id}`);
+      await this.userRepository.update(user.id, {
+        password: data.password,
+        switchPassword: false,
+      });
+      logger.info(
+        `UserService::switchPw::try to change password::${user.id}::success`
+      );
+    } catch (error) {
+      logger.error(
+        `UserService::switchPw::failed to change password::${error}`
+      );
       throw new CustomError({
         code: 'USER_SWITCH_PASSWORD_ERROR',
         message: 'Houve um problema ao trocar a sua senha',
         status: 500,
-      })
+      });
     }
   }
 
