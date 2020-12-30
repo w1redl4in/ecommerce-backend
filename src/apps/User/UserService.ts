@@ -117,7 +117,7 @@ class UserService {
     }
   }
 
-  async userFirstLogin(id: string) {
+  private async userFirstLogin(id: string) {
     try {
       await this.userRepository.update(id, {
         firstLogin: false,
@@ -134,6 +134,8 @@ class UserService {
   async patchImage(payload: { image: string }, user: UserRequest) {
     try {
       const { image } = payload;
+
+      await this.userFirstLogin(user.id);
 
       await this.userRepository.update(user.id, {
         imageUrl: image,
@@ -156,6 +158,33 @@ class UserService {
         message: 'Houve um problema ao trocar a sua senha',
         status: 500,
       })
+    }
+  }
+
+  async getUserInfo(user: UserRequest) {
+    try {
+      const userId = user.id;
+
+      const userData = await this.userRepository.findOne(userId);
+
+      if (!userData)
+        throw new CustomError({
+          code: 'INVALID_USER_ID',
+          message: 'Usuário não encontrado',
+          status: 404,
+        });
+
+      delete userData?.password;
+
+      return userData;
+    } catch (error) {
+      if (error instanceof CustomError) throw error;
+
+      throw new CustomError({
+        code: 'GET_USER_INFO_ERROR',
+        message: 'Erro inesperado no GetUserInfo',
+        status: 500,
+      });
     }
   }
 }

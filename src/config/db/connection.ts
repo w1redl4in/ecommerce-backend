@@ -13,7 +13,7 @@ const connection = createConnection({
   password: database.password,
   database: database.database,
   entities: [User, Order, Product],
-  synchronize: server.env === 'dev',
+  synchronize: true,
 });
 
 export default connection;

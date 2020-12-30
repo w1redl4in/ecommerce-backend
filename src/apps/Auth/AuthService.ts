@@ -9,7 +9,6 @@ import {
 import { User } from '../User/User.entity';
 import { auth } from '../../config/config';
 import logger from '../../middlewares/Logger';
-import UserService from '../User/UserService';
 
 interface Auth {
   email: string;
@@ -61,16 +60,6 @@ class AuthService {
 
       logger.info(
         `AuthService::authenticate::user found::generating token::success`
-      );
-
-      logger.info(
-        `AuthService::authenticate::changing firstLogin flag to false::user::${userExists.id}`
-      );
-
-      await UserService.userFirstLogin(userExists.id);
-
-      logger.info(
-        `AuthService::authenticate::changing firstLogin flag to false::user::${userExists.id}::success`
       );
 
       delete userExists.password;

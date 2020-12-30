@@ -50,3 +50,10 @@ export const switchPassword = async (
   const response = await UserService.switchPw(req.params.id, req.body)
   return res.json(response)
 }
+export const getUserInfo = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const response = await UserService.getUserInfo(req.user);
+  return res.json(response);
+};
